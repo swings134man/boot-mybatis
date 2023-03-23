@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="custMapper">
+
+    <!-- 고객가입  -->
+    <insert id="custEntr" parameterType="com.boot.batis.first.dto.CustDTO" >
+        insert into custM (
+            custNo, 		/*고객번호(Auto)*/
+            custEmal,		/*고객email*/
+            custId,			/*고객ID*/
+            custPw,			/*고객PW*/
+            custNm,			/*고객이름*/
+            custHphn,		/*고객핸드폰번호*/
+            custGen,		/*고객성별*/
+            custAge,		/*고객나이*/
+            custAddr		/*고객주소*/
+        )values(
+                   NULL,
+                   #{custEmal},
+                   #{custId},
+                   #{custPw},
+                   #{custNm},
+                   #{custHphn},
+                   #{custGen},
+                   #{custAge},
+                   #{custAddr}
+               )
+        /*author : seokjunKang
+          name   : 고객가입 쿼리 (custEntr) insert
+        */
+    </insert>
+
+    <!-- 고객가입 정보확인  -->
+    <select id="retrieveCustEntr" parameterType="com.boot.batis.first.dto.CustDTO" resultType="com.boot.batis.first.dto.CustDTO">
+        SELECT
+            custEmal,		/*고객email*/
+            custId,			/*고객ID*/
+            custPw,			/*고객PW*/
+            custNm,			/*고객이름*/
+            custHphn,		/*고객핸드폰번호*/
+            custGen,		/*고객성별*/
+            custAge,		/*고객나이*/
+            custAddr		/*고객주소*/
+        FROM custM
+        WHERE custId = 	#{custId}
+        /*author : seokjunKang
+          name   : 고객정보 확인 쿼리 (retrieveCustEntr) SELECT
+        */
+    </select>
+
+    <!-- 회원정보 삭제  -->
+    <delete id="deleteCustEntr" parameterType="com.boot.batis.first.dto.CustDTO">
+        DELETE FROM custM
+        WHERE custID = #{custId}
+
+        /*author : seokjunKang
+           name   : 회원정보 삭제 쿼리 (deleteCustEntr) DELETE
+         */
+    </delete>
+
+    <!-- 고객가입 정보확인 Page -->
+    <select id="retrieveCustAllPage" parameterType="com.boot.batis.first.dto.CustDTO" resultType="com.boot.batis.first.dto.CustDTO">
+        SELECT
+        custEmal,		/*고객email*/
+        custId,			/*고객ID*/
+        custPw,			/*고객PW*/
+        custNm,			/*고객이름*/
+        custHphn,		/*고객핸드폰번호*/
+        custGen,		/*고객성별*/
+        custAge,		/*고객나이*/
+        custAddr		/*고객주소*/
+        FROM custM
+        <where>
+            <if test="custId != null">
+                AND custId = #{custId}
+            </if>
+            <if test="custNm != null">
+                AND custNm = #{custNm}
+            </if>
+        </where>
+
+        /*author : seokjunKang
+        name   : 고객정보 확인 page 쿼리 (retrieveCustAllPage) SELECT
+        */
+    </select>
+
+    <!-- 회원정보 수정  -->
+    <update id="updateCustEntr" parameterType="com.boot.batis.first.dto.CustDTO">
+        UPDATE custM
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="custNm != null">
+                custNm = #{custNm},
+            </if>
+            <if test="custHphn != null">
+                custHphn = #{custHphn},
+            </if>
+            <if test="custGen != null">
+                custGen = #{custGen},
+            </if>
+            <if test="custAge != null">
+                custAge = #{custAge},
+            </if>
+            <if test="custAddr != null">
+                custAddr = #{custAddr},
+            </if>
+            <if test="custEmal != null">
+                custEmal = #{custEmal},
+            </if>
+        </trim>
+        WHERE custId = #{custId}
+
+        /*author : seokjunKang
+        name   : 고객정보 수정 쿼리 (updateCustEntr) UPDATE
+        pre	 : 해당 항목만 변경 가능
+        */
+    </update>
+
+    <!-- 회원 로그인 -->
+    <select id="retrieveCustLogin" parameterType="com.boot.batis.first.dto.CustDTO" resultType="com.boot.batis.first.dto.CustDTO">
+        SELECT custPw, custId
+        FROM custM
+        WHERE custId = #{custId}
+
+        /*author : seokjunKang
+           name   : 고객로그인 쿼리 (retrieveCustLogin) SELECT
+           pre	 : 로그인 PW 확인
+         */
+    </select>
+
+</mapper>
