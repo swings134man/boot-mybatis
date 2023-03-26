@@ -13,9 +13,17 @@ public class CustDAO {
 
     private final SqlSessionTemplate sqlSessionTemplate;
 
+    // custId 를 통한 row 검색
     public CustDTO getOne(CustDTO inDTO) {
         CustDTO outDTO = sqlSessionTemplate.selectOne("custMapper.retrieveCustEntr", inDTO);
         return outDTO;
     }
+
+    // save
+    public int saveCustOne(CustDTO dto) {
+        return sqlSessionTemplate.insert("custMapper.custEntr", dto);
+    }
+
+    //
 
 }

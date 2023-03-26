@@ -2,17 +2,17 @@ package com.boot.batis.first.controller;
 
 import com.boot.batis.first.dao.CustDAO;
 import com.boot.batis.first.dto.CustDTO;
+import com.boot.batis.first.service.CustService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 public class CustController {
 
+    private final CustService service;
     private final CustDAO dao;
 
     @GetMapping("/v1/getOne")
@@ -25,4 +25,12 @@ public class CustController {
         System.out.println("one = " + one);
         return one;
     }
-}
+
+    @PostMapping("/v1/saveCustOne")
+    public CustDTO saveCustOne(@RequestBody CustDTO dto) {
+        return service.saveCustOne(dto);
+    }
+
+
+
+}//class
