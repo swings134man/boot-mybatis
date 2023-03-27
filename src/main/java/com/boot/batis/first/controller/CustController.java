@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -32,5 +34,27 @@ public class CustController {
     }
 
 
+    @GetMapping("/v1/cust/findAll")
+    public List<CustDTO> findAll() {
+        List<CustDTO> all = service.findAll();
+        System.out.println("all = " + all);
+        return all;
+    }
+
+    @PutMapping("/v1/cust/update")
+    public CustDTO updateCustOne(@RequestBody CustDTO dto) {
+        CustDTO result = service.updateCustOne(dto);
+        return result;
+    }
+
+    @DeleteMapping("/v1/cust/deleteOne")
+    public String deleteCustOne(CustDTO dto) {
+        String msg = "null";
+        int i = service.deleteCustOne(dto);
+        if(i == 1) {
+            msg = "Delete Success";
+        }
+        return msg;
+    }
 
 }//class
