@@ -4,7 +4,18 @@ spring:
     username: root
     password: 1234
     url: jdbc:mysql://localhost:3306/ev_music?useSSL=false
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
 
 # MyBatis
 mybatis:
   mapper-locations: mapper/**/*.xml
+
+## Monitoring: Actuator(Spring To Prometheus)
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: health, info, metrics, prometheus
+#
