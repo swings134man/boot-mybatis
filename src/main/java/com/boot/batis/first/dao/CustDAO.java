@@ -3,6 +3,7 @@ package com.boot.batis.first.dao;
 import com.boot.batis.first.dto.CustDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +32,17 @@ public class CustDAO {
         List<CustDTO> resultList = sqlSessionTemplate.selectList("custMapper.findAll");
         log.info("DAO : findAll Logic");
         return resultList;
+    }
+
+    // paging
+    public List<CustDTO> findPaging(CustDTO dto , int pageNumber, int pageRow) {
+        // MyBatis Paging API
+        RowBounds rowBounds = new RowBounds(pageNumber, pageRow);
+
+        List<CustDTO> list = sqlSessionTemplate.selectList("custMapper.retrieveCustAllPage", dto, rowBounds);
+        log.info("DAO : Paging = {}", list);
+
+        return list;
     }
 
     public int upateCustOne(CustDTO dto) {

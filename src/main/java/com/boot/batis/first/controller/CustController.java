@@ -41,6 +41,20 @@ public class CustController {
         return all;
     }
 
+    @GetMapping("/v1/cust/all/paging")
+    public List<CustDTO> findAllPaging(@RequestParam(required = false) String custId,
+                                       @RequestParam(required = false) String custNm,
+                                       @RequestParam int pageNo,
+                                       @RequestParam int pageRow) {
+        CustDTO dto = CustDTO.builder()
+                .custId(custId)
+                .custNm(custNm)
+                .build();
+
+        List<CustDTO> allPaging = service.findAllPaging(dto, pageNo, pageRow);
+        return allPaging;
+    }
+
     @PutMapping("/v1/cust/update")
     public CustDTO updateCustOne(@RequestBody CustDTO dto) {
         CustDTO result = service.updateCustOne(dto);
@@ -56,5 +70,6 @@ public class CustController {
         }
         return msg;
     }
+
 
 }//class

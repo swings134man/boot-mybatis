@@ -54,6 +54,16 @@ public class CustService {
         return result;
     }
 
+    // 고객 리스트 페이징
+    // pageNo - 페이지 번호, pageRow - 한페이지당 보여야 하는 갯수.
+    @Transactional(readOnly = true)
+    public List<CustDTO> findAllPaging(CustDTO dto, int pageNo, int pageRow) {
+        int pageNumber = (pageNo - 1) * pageRow;
+
+        List<CustDTO> paging = dao.findPaging(dto, pageNumber, pageRow);
+        return paging;
+    }
+
     // 고객 1개 update(수정)
     // DB Update시 Cache또한 Update -> custDTO 의 Cache의 Key는 cust로 지정했으므로 똑같이 설정해주어야 한다.
     @Transactional
