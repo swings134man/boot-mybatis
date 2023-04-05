@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+
+
+    <!--  join with custM -> where=board_writer -->
+    <select id="boardJoinCustM" parameterType="com.boot.batis.first.dto.BoardCustDTO" resultType="com.boot.batis.first.dto.BoardCustDTO">
+        SELECT
+            c.custNo, 		/*고객번호(Auto)*/
+            c.custEmal,		/*고객email*/
+            c.custId,			/*고객ID*/
+            c.custPw,			/*고객PW*/
+            c.custNm,			/*고객이름*/
+            c.custHphn,		/*고객핸드폰번호*/
+            c.custGen,		/*고객성별*/
+            c.custAge,		/*고객나이*/
+            c.custAddr,		/*고객주소*/
+            b.board_no,
+            b.board_title,
+            b.board_content,
+            b.board_writer,
+            b.board_count
+        FROM board as b
+        INNER JOIN custM as c
+        ON b.board_writer = c.custId
+        WHERE b.board_writer = #{board_writer}
+
+    </select>
+
+
+</mapper>

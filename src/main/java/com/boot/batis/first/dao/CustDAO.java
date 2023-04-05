@@ -1,5 +1,6 @@
 package com.boot.batis.first.dao;
 
+import com.boot.batis.first.dto.BoardCustDTO;
 import com.boot.batis.first.dto.CustDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -56,5 +57,12 @@ public class CustDAO {
         return delete;
     }
 
+
+    // test board, cust JOIN
+    public List<BoardCustDTO> joinWithBoard(BoardCustDTO inDTO) {
+        List<BoardCustDTO> result = sqlSessionTemplate.selectList("boardMapper.boardJoinCustM", inDTO);
+        log.info("JOIN TEST DAO = {}", result);
+        return result;
+    }
 
 }

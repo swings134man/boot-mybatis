@@ -1,6 +1,7 @@
 package com.boot.batis.first.controller;
 
 import com.boot.batis.first.dao.CustDAO;
+import com.boot.batis.first.dto.BoardCustDTO;
 import com.boot.batis.first.dto.CustDTO;
 import com.boot.batis.first.service.CustService;
 import lombok.RequiredArgsConstructor;
@@ -71,5 +72,15 @@ public class CustController {
         return msg;
     }
 
+    // test board, cust JOIN
+    // board_writer 혹은, custId를 파라미터로 받는다.
+    @GetMapping("/v1/board/joinCust")
+    public List<BoardCustDTO> joinWithBoard(@RequestParam String board_writer) {
+        BoardCustDTO dto = new BoardCustDTO();
+        dto.setBoard_writer(board_writer);
+
+        List<BoardCustDTO> result = service.joinWithBoard(dto);
+        return result;
+    }
 
 }//class

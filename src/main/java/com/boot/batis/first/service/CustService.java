@@ -1,6 +1,7 @@
 package com.boot.batis.first.service;
 
 import com.boot.batis.first.dao.CustDAO;
+import com.boot.batis.first.dto.BoardCustDTO;
 import com.boot.batis.first.dto.CustDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -88,7 +89,12 @@ public class CustService {
             log.info("Service(cust) Delete Success = {}", dto.getCustId());
             return i;
         }else {throw new RuntimeException("Delete 실패");}
+    }//delete
 
+    // test board, cust JOIN
+    public List<BoardCustDTO> joinWithBoard(BoardCustDTO inDTO) {
+        List<BoardCustDTO> boardCustDTO = dao.joinWithBoard(inDTO);
+        return boardCustDTO;
     }
 
 }
