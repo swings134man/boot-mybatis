@@ -24,8 +24,17 @@
         INNER JOIN custM as c
         ON b.board_writer = c.custId
         WHERE b.board_writer = #{board_writer}
-
     </select>
 
+    <select id="boardList" resultType="com.boot.batis.board.dto.BoardDTO">
+        SELECT
+            b.board_no,
+            b.board_title,
+            b.board_content,
+            b.board_writer,
+            b.board_count
+        FROM
+            board as b
+    </select>
 
 </mapper>
