@@ -35,6 +35,7 @@
             b.board_count
         FROM
             board as b
+        ORDER BY b.board_no DESC
     </select>
 
 </mapper>
