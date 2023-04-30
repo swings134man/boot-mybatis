@@ -2,6 +2,7 @@
 
 #### 예정
 - jooq 연동
+    -> issue: jooq 연동 에러
 
 
 ### TODO
