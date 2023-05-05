@@ -1,5 +1,6 @@
 package com.boot.batis.first.controller;
 
+import com.boot.batis.config.aop.annotations.ActionMapping;
 import com.boot.batis.first.dao.CustDAO;
 import com.boot.batis.first.dto.BoardCustDTO;
 import com.boot.batis.first.dto.CustDTO;
@@ -18,6 +19,7 @@ public class CustController {
     private final CustService service;
     private final CustDAO dao;
 
+    @ActionMapping
     @GetMapping("/v1/getOne")
     public CustDTO getOne(@RequestParam String custId) {
         // http://localhost:8080/v1/getOne?custId=seoul
@@ -25,23 +27,24 @@ public class CustController {
         dto.setCustId(custId);
 
         CustDTO one = dao.getOne(dto);
-        System.out.println("one = " + one);
         return one;
     }
 
+    @ActionMapping
     @PostMapping("/v1/saveCustOne")
     public CustDTO saveCustOne(@RequestBody CustDTO dto) {
         return service.saveCustOne(dto);
     }
 
 
+    @ActionMapping
     @GetMapping("/v1/cust/findAll")
     public List<CustDTO> findAll() {
         List<CustDTO> all = service.findAll();
-        System.out.println("all = " + all);
         return all;
     }
 
+    @ActionMapping
     @GetMapping("/v1/cust/all/paging")
     public List<CustDTO> findAllPaging(@RequestParam(required = false) String custId,
                                        @RequestParam(required = false) String custNm,
@@ -56,12 +59,14 @@ public class CustController {
         return allPaging;
     }
 
+    @ActionMapping
     @PutMapping("/v1/cust/update")
     public CustDTO updateCustOne(@RequestBody CustDTO dto) {
         CustDTO result = service.updateCustOne(dto);
         return result;
     }
 
+    @ActionMapping
     @DeleteMapping("/v1/cust/deleteOne")
     public String deleteCustOne(CustDTO dto) {
         String msg = "null";
