@@ -31,6 +31,16 @@ public class CustController {
     }
 
     @ActionMapping
+    @GetMapping("cust/{id}")
+    public CustDTO apiGetOne(@PathVariable String id) {
+        CustDTO dto = new CustDTO();
+        dto.setCustId(id);
+
+        CustDTO one = dao.getOne(dto);
+        return one;
+    }
+
+    @ActionMapping
     @PostMapping("/v1/saveCustOne")
     public CustDTO saveCustOne(@RequestBody CustDTO dto) {
         return service.saveCustOne(dto);
