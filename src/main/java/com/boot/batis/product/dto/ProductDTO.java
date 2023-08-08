@@ -13,11 +13,11 @@ import lombok.Data;
 @Data
 public class ProductDTO {
 
-    private int pd_id;
-    private String pd_name;
-    private Long pd_price;
-    private String pd_subject;
-    private String created_date;
-    private String modified_date;
+    private int pdId;
+    private String pdName;
+    private Long pdPrice;
+    private String pdSubject;
+    private String createdDate;
+    private String modifiedDate;
 
 }

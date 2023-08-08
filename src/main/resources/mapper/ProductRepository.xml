@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--<mapper namespace="productMapper">-->
+<mapper namespace="com.boot.batis.product.business.ProductRepository">
+
+    <resultMap id="productResult" type="ProductDTO">
+        <result property="pdId" column="pd_id" jdbcType="INT" />
+        <result property="pdName" column="pr_name" jdbcType="VARCHAR" />
+        <result property="pdPrice" column="pd_price" jdbcType="BIGINT" />
+        <result property="pdSubject" column="pd_subject" jdbcType="VARCHAR" />
+        <result property="createdDate" column="created_date" jdbcType="DATETIME" />
+        <result property="modifiedDate" column="modified_date" jdbcType="DATETIME" />
+    </resultMap>
+
+
+    <insert id="save">
+        INSERT INTO PRODUCT
+            (pd_id,
+             pr_name,
+             pd_price,
+             pd_subject,
+             created_date,
+             modified_date)
+        VALUES
+            (#{pdId},
+             #{pdName},
+             #{pdPrice},
+             #{pdSubject},
+             #{createdDate},
+             #{modifiedDate})
+    </insert>
+
+    <select id="findAll" resultMap="productResult">
+        SELECT
+            pd_id,
+            pr_name,
+            pd_price,
+            pd_subject,
+            created_date,
+            modified_date
+        FROM
+            PRODUCT
+    </select>
+
+</mapper>
