@@ -3,20 +3,20 @@
 <!--<mapper namespace="productMapper">-->
 <mapper namespace="com.boot.batis.product.business.ProductRepository">
 
-    <resultMap id="productResult" type="ProductDTO">
-        <result property="pdId" column="pd_id" jdbcType="INT" />
-        <result property="pdName" column="pr_name" jdbcType="VARCHAR" />
-        <result property="pdPrice" column="pd_price" jdbcType="BIGINT" />
+    <resultMap id="productResult" type="com.boot.batis.product.dto.ProductDTO">
+        <result property="pdId" column="pd_id" jdbcType="NUMERIC" />
+        <result property="pdName" column="pd_name" jdbcType="VARCHAR" />
+        <result property="pdPrice" column="pd_price" jdbcType="NUMERIC" />
         <result property="pdSubject" column="pd_subject" jdbcType="VARCHAR" />
-        <result property="createdDate" column="created_date" jdbcType="DATETIME" />
-        <result property="modifiedDate" column="modified_date" jdbcType="DATETIME" />
+        <result property="createdDate" column="created_date" jdbcType="DATE" />
+        <result property="modifiedDate" column="modified_date" jdbcType="DATE" />
     </resultMap>
 
 
     <insert id="save">
         INSERT INTO PRODUCT
             (pd_id,
-             pr_name,
+             pd_name,
              pd_price,
              pd_subject,
              created_date,
@@ -33,7 +33,7 @@
     <select id="findAll" resultMap="productResult">
         SELECT
             pd_id,
-            pr_name,
+            pd_name,
             pd_price,
             pd_subject,
             created_date,

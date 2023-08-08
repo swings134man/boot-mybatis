@@ -12,8 +12,8 @@ spring:
 #      matching-strategy: ant_path_matcher
 
 # MyBatis
-mybatis:
-  mapper-locations: mapper/**/*.xml
+#mybatis:
+#  mapper-locations: mapper/**/*.xml
 
 ## Monitoring: Actuator(Spring To Prometheus)
 #management:

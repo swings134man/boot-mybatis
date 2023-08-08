@@ -7,6 +7,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
@@ -47,6 +48,9 @@ public class MyBatisConfig {
         // XML 설정 파일로도 가능
         // Resource resource = new ClassPathResource("mybatis-config.xml");
         // sessionFactory.setConfigLocation(resource);
+
+        // 매퍼 XML 파일 위치 (resources/mapper 디렉토리에 매퍼 XML 파일이 있는 경우 설정 가능)
+        sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/**/*.xml"));
 
         return sessionFactory.getObject();
     }
