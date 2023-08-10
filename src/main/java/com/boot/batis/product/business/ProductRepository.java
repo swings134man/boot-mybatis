@@ -4,11 +4,13 @@ import com.boot.batis.product.dto.ProductDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-@Mapper
+//@Mapper
 public interface ProductRepository {
 
     void save(ProductDTO dto);
 
-    ProductDTO findAll();
+    List<ProductDTO> findAll();
 }

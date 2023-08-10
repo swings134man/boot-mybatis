@@ -13,6 +13,8 @@ import lombok.Data;
 @Data
 public class ProductDTO {
 
+    private final static long serialVersionUID = 1L;
+
     private int pdId;
     private String pdName;
     private Long pdPrice;

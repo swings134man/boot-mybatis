@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -27,9 +29,9 @@ public class ProductController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<ProductDTO> findAll() {
-        ProductDTO dto = productService.findAll();
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+    public ResponseEntity<List<ProductDTO>> findAll() {
+        List<ProductDTO> list = productService.findAll();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 }
