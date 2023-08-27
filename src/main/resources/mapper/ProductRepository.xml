@@ -3,6 +3,16 @@
 <!--<mapper namespace="productMapper">-->
 <mapper namespace="com.boot.batis.product.business.ProductRepository">
 
+    <sql id="productColumns">
+        ${alias}pd_id,
+        ${alias}pd_name,
+        ${alias}pd_price,
+        ${alias}pd_subject,
+        ${alias}created_date,
+        ${alias}modified_date
+    </sql>
+
+    <!--  RESULT-MAP  -->
     <resultMap id="productResult" type="com.boot.batis.product.dto.ProductDTO">
         <result property="pdId" column="pd_id" jdbcType="NUMERIC" />
         <result property="pdName" column="pd_name" jdbcType="VARCHAR" />
@@ -12,15 +22,33 @@
         <result property="modifiedDate" column="modified_date" jdbcType="DATE" />
     </resultMap>
 
+    <!-- CONDITIONS   -->
+    <sql id="productCondition">
+        <where>
+            <if test="pdId != null and pdId != ''">
+                pd_id = #{pdId}
+            </if>
+            <if test="pdName != null and pdName != ''">
+                pd_name = #{pdName}
+            </if>
+            <if test="pdPrice != null and pdPrice != ''">
+                pd_price = #{pdPrice}
+            </if>
+            <if test="pdSubject != null and pdSubject != ''">
+                pd_subject = #{pdSubject}
+            </if>
+            <if test="createdDate != null and createdDate != ''">
+                created_date = #{createdDate}
+            </if>
+            <if test="modifiedDate != null and modifiedDate != ''">
+                modified_date = #{modifiedDate}
+            </if>
+        </where>
+    </sql>
 
     <insert id="save">
         INSERT INTO PRODUCT
-            (pd_id,
-             pd_name,
-             pd_price,
-             pd_subject,
-             created_date,
-             modified_date)
+            (<include refid="productColumns"/>)
         VALUES
             (#{pdId},
              #{pdName},
@@ -32,14 +60,18 @@
 
     <select id="findAll" resultMap="productResult">
         SELECT
-            pd_id,
-            pd_name,
-            pd_price,
-            pd_subject,
-            created_date,
-            modified_date
+            <include refid="productColumns"/>
         FROM
             PRODUCT
+    </select>
+
+    <select id="getProduct" resultMap="productResult">
+        SELECT
+            <include refid="productColumns">
+                <property name="alias" value="product."/>
+            </include>
+        FROM PRODUCT as product
+            <include refid="productCondition"/>
     </select>
 
 </mapper>

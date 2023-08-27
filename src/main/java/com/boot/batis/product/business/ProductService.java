@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -23,5 +24,10 @@ public class ProductService {
 
     public List<ProductDTO> findAll() {
         return repository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public ProductDTO getName(Map<String, Object> params) {
+        return repository.getProduct(params);
     }
 }

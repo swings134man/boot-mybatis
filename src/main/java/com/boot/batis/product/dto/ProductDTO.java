@@ -2,6 +2,8 @@ package com.boot.batis.product.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /************
  * @info : Product DTO Class
  * @name : ProductDTO
@@ -11,7 +13,7 @@ import lombok.Data;
  * @Description :
  ************/
 @Data
-public class ProductDTO {
+public class ProductDTO implements Serializable {
 
     private final static long serialVersionUID = 1L;
 
