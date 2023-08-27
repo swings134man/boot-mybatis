@@ -1,6 +1,17 @@
 # boot-mybatis
+### Spring Boot & MyBatis 테스트, 적용 Repo
 
-#### 예정
+
+## 🔥uses
+- Java 11
+- spring boot 2.7.10
+- myBatis
+- MySQL
+- Swagger(fox:2.9.2)
+
+
+
+### 예정
 - jooq 연동
     -> issue: jooq 연동 에러
 
